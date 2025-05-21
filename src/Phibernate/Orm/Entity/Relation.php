@@ -6,7 +6,7 @@
  * @link https://github.com/SchrodtSven/Phibernate
  * @package 
  * @version 0.1
- * @since 2025-03-05-07
+ * @since 2025-05-07
  */
 namespace Phibernate\Orm\Entity;
 
@@ -19,6 +19,6 @@ class Relation
         $this->c = new Attributes();
     }
 
-
+    
    
 }

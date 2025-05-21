@@ -6,26 +6,29 @@
  * @link https://github.com/SchrodtSven/Phibernate
  * @package 
  * @version 0.1
- * @since 2025-03-05-07
+ * @since 2025-05-07
  */
+
 namespace Phibernate\Orm\Entity;
 
 class Attributes
 {
+
     protected $props = [];
 
     protected $types = [];
 
-    public function __set($name, $value)
+
+    public function __set($name, $value): void
     {
         $this->props[$name] = $value;
         $this->types[$name] = gettype($value);
-        if(gettype($value) == 'object') $this->types[$name] = $value::class. ' ' .$this->types[$name];
-
+        if (gettype($value) == 'object') $this->types[$name] = $value::class . ' ' . $this->types[$name];
+        
     }
 
 
-    public function __get($name)
+    public function __get($name): mixed
     {
         return  $this->props[$name] ?? null;
     }
@@ -36,20 +39,28 @@ class Attributes
         return array_keys($this->props);
     }
 
+
     public function data(): array
     {
         return $this->props;
     }
+
 
     public function type($name): mixed
     {
         return $this->types[$name] ?? null;
     }
 
-    
+
+    public function debugInfo(int $mode = 1): string
+    {
+        return var_export($this->props, true);
+    }
+
     public function __toString(): string
     {
         return str_replace(['array (', ')'], '', var_export($this->props, true));
-        
     }
+
+
 }
